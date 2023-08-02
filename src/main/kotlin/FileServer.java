@@ -30,12 +30,20 @@ public class FileServer {
                 String fileName = in.readLine();
                 if (fileName == null)
                     fileName = "";
+                System.out.println("SERVER: Reading " + fileName);
                 File fileToRead = new File(fileName);
                 Scanner scanner = new Scanner(fileToRead);
                 while (scanner.hasNext()) {
-                    String line = scanner.nextLine();
+                    String line = scanner.nextLine() + "\n";
+                    System.out.println("SERVER: Sending line: \n" + line);
                     out.write(line.getBytes());
+                    try {
+                        Thread.sleep(500L);
+                    } catch (Exception e){}
                 }
+                String eof = "EOF\n";
+                out.write(eof.getBytes());
+                System.out.println("SERVER: File content sended...");
                 return true;
             }
             catch (IOException failedToRead) {

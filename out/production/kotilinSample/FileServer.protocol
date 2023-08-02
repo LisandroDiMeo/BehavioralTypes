@@ -1,0 +1,18 @@
+typestate FileServer {
+    OFF = {
+        boolean start(SocketWrapper): <true: LISTENING, false: end>
+    }
+    LISTENING = {
+        boolean hasRequest(): <
+            true: ATTENDING,
+            false: LISTENING
+        >
+    }
+    ATTENDING = {
+        boolean attendRequest(): <true: LISTENING, false: CLOSING>
+    }
+    CLOSING = {
+        void close(): end
+    }
+
+}

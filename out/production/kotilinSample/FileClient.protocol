@@ -1,0 +1,10 @@
+typestate FileClient {
+    CLIENT_READY = {
+        boolean start(): <true: READY_TO_REQUEST, false: end>,
+        drop: end
+    }
+    READY_TO_REQUEST = {
+        boolean request(String): <true: READY_TO_REQUEST, false: end>,
+        void close(): end
+    }
+}

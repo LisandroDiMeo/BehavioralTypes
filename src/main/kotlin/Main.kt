@@ -1,12 +1,24 @@
-import java.io.File
+import kotlinx.coroutines.*
+import java.net.ServerSocket
 
 fun main(args: Array<String>) {
-    println("Hello World!")
-
-    val f = File("example.txt")
-    f.bufferedReader().lines().forEach { println(it) }
-
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    runBlocking {
+        launch(Dispatchers.IO) {
+            val serverSocket = ServerSocket(1234)
+            serverSocket.accept().apply {
+                FileServerThread(this).start()
+            }
+        }
+        val clientJob = Job()
+        launch(clientJob) {
+            val client = FileClient()
+            if (client.start()) {
+                if (client.request("example.txt")) {
+                    client.close()
+                }
+            } else {
+                println("Could not start client!")
+            }
+        }
+    }
 }

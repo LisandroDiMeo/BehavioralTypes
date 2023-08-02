@@ -14,6 +14,7 @@ public class FileClient {
             socket = new Socket("localhost", 1234);
             out = socket.getOutputStream();
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println("CLIENT: Started!");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,12 +31,16 @@ public class FileClient {
         boolean fileExists = false;
         while ((line = in.readLine()) != null) {
             if (line == null || line.equals("FILE_NOT_FOUND")) {
+                System.out.println("CLIENT: File not found!");
                 return false;
             } else {
                 fileExists = true;
-                fileContent.append(line);
+                if (line.equals("EOF")) break;
+                fileContent.append(line + "\n");
+                System.out.println("CLIENT: Received " + line + "\n");
             }
         }
+        System.out.println("CLIENT: Content received was:\n" + fileContent);
         return fileExists ? true : false;
 
     }
