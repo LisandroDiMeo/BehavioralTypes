@@ -67,36 +67,6 @@ public class FileServer {
             return false;
         }
         return false;
-//        if (command != null && command.equals("REQUEST")) {
-//            // Read another line (since we send two lines).
-//            String fileName = "";
-//            try {
-//                if (in != null)
-//                    fileName = in.readLine();
-//            } catch (IOException e ) {
-//                fileName = "";
-//            }
-//            if (fileName == null) {
-//                fileName = "";
-//            }
-//            File fileToRead = new File(fileName);
-//            try {
-//                Scanner scanner = new Scanner(fileToRead);
-//                while(scanner.hasNext()) {
-//                    String line = scanner.nextLine();
-//                    if (out != null)
-//                        out.write(line.getBytes());
-//                }
-//                return RequestState.FILE_SENT;
-//            } catch(FileNotFoundException e) {
-//                String fileNotFound = "FILE_NOT_FOUND\n";
-//                out.write(fileNotFound.getBytes());
-//                return RequestState.FILE_NOT_FOUND;
-//            }
-//        } else if (command != null && command.equals("CLOSE")) {
-//            return RequestState.CLOSE_PROTOCOL;
-//        }
-//        return RequestState.NO_REQUEST;
     }
 
     public void close() {
