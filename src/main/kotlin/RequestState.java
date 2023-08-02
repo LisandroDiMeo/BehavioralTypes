@@ -1,0 +1,3 @@
+public enum RequestState {
+    NO_REQUEST, FILE_SENT, FILE_NOT_FOUND, CLOSE_PROTOCOL
+}
