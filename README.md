@@ -1,5 +1,7 @@
 # BehavioralTypes
 
+- Simple *Client-Server* example of how to implement `TypeStates` in Java. The usage example is written in Kotlin, because it's easier to launch two coroutines with client and server in each one.
+
 ## Protocols
 
 ### File Client
