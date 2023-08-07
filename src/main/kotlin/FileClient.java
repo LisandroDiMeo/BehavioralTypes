@@ -27,20 +27,21 @@ public class FileClient {
         byte[] fileNameBytes = (filename + "\n").getBytes();
         out.write(fileNameBytes);
         StringBuilder fileContent = new StringBuilder();
-        String line = "";
+        int byteRead;
         boolean fileExists = false;
-        while ((line = in.readLine()) != null) {
-            if (line == null || line.equals("FILE_NOT_FOUND")) {
+
+        while ((byteRead = in.read()) != -1) {
+            if (fileContent.toString().contains("FILE_NOT_FOUND")) {
                 System.out.println("CLIENT: File not found!");
                 return false;
             } else {
                 fileExists = true;
-                if (line.equals("EOF")) break;
-                fileContent.append(line + "\n");
-                System.out.println("CLIENT: Received " + line + "\n");
+                if (fileContent.toString().contains("EOF")) break;
+                fileContent.append((char) byteRead);
+                System.out.println("CLIENT: Received " + (char) byteRead);
             }
         }
-        System.out.println("CLIENT: Content received was:\n" + fileContent);
+        System.out.println("CLIENT: Content received was:\n" + fileContent.substring(0, fileContent.length() - 3));
         return fileExists ? true : false;
 
     }

@@ -1,6 +1,7 @@
 typestate FileServer {
     OFF = {
-        boolean start(SocketWrapper): <true: LISTENING, false: end>
+        boolean start(SocketWrapper): <true: LISTENING, false: end>,
+        drop: end
     }
     LISTENING = {
         boolean hasRequest(): <

@@ -37,9 +37,6 @@ public class FileServer {
                     String line = scanner.nextLine() + "\n";
                     System.out.println("SERVER: Sending line: \n" + line);
                     out.write(line.getBytes());
-                    try {
-                        Thread.sleep(500L);
-                    } catch (Exception e){}
                 }
                 String eof = "EOF\n";
                 out.write(eof.getBytes());
